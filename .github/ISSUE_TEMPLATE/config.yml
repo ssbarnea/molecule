@@ -1,0 +1,22 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Molecule Vagrant
+    url: https://github.com/ansible-community/molecule-vagrant/
+  - name: Molecule Azure
+    url: https://github.com/ansible-community/molecule-azure/
+  - name: Molecule OpenStack
+    url: https://github.com/ansible-community/molecule-openstack/
+  - name: Molecule EC2 (AWS)
+    url: https://github.com/ansible-community/molecule-ec2/
+  - name: Molecule GCE (Google Cloud Engine)
+    url: https://github.com/ansible-community/molecule-gce/
+  - name: Molecule LibVirt (planned)
+    url: https://github.com/ansible-community/molecule-libvirt/
+  - name: Molecule Containers (planned)
+    url: https://github.com/ansible-community/molecule-containers/
+  - name: Molecule HetzerCloud (planned)
+    url: https://github.com/ansible-community/molecule-hetznercloud/
+  - name: Molecule Linode
+    url: https://github.com/ansible-community/molecule-linode/
+  - name: Molecule DigitalOcean
+    url: https://github.com/ansible-community/molecule-digitalocean/
