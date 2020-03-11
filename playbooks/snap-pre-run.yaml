@@ -12,25 +12,32 @@
         name: snapd.socket
         state: started
 
-    - when: ansible_os_family == 'Debian'
-      name: Install snapcraft (debian)
-      package:
-        name: snapcraft
-        state: present
+    - name: Activate snapd
+      when: ansible_os_family == 'RedHat'
+      shell: |
+        ln -s /var/lib/snapd/snap /snap
 
-    - when: ansible_os_family == 'RedHat'
-      block:
-
-        - name: Activate snapd
-          shell: |
-            ln -s /var/lib/snapd/snap /snap
-
-        - name: Install snapcraft (redhat)
-          shell: |
-            type snapcraft || snap install --classic snapcraft
+    # we do not install snapcraft using system packager because it is too old
+    - name: Install snapcraft (redhat)
+      shell:
+        cmd: |
+          set -ux +e
+          snap install --classic multipass
+          snap install --classic snapcraft
+          multipass set local.driver=libvirt
+          snap info multipass
+          ls -l /var/snap/multipass/common/multipass_socket
+          journalctl -u snap.multipass.*
+          multipass start
+          journalctl -u snap.multipass.*
+        executable: /bin/bash
 
     - name: Validate snapd install
       shell: |
         set -e
         snap version
+        multipass version
+        multipass list
+        multipass info --all
         snapcraft version
+      changed_when: false
